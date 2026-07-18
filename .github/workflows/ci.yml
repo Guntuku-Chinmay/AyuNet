@@ -1,0 +1,36 @@
+name: AyuNet CI Pipeline
+
+on:
+  push:
+    branches: [ main, master ]
+  pull_request:
+    branches: [ main, master ]
+
+jobs:
+  build_and_test:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Codebase
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js Environment
+        uses: actions/setup-node@v4
+        with:
+          node-version: '24'
+          cache: 'yarn'
+
+      - name: Install Monorepo Dependencies
+        run: yarn install --frozen-lockfile
+
+      - name: Prisma Client Generation
+        run: yarn workspace backend prisma:generate
+
+      - name: Run Formatting Check
+        run: yarn format:check
+
+      - name: Run Linting Checks
+        run: yarn lint
+
+      - name: Compile Workspaces (Build)
+        run: yarn build

@@ -1,0 +1,72 @@
+version: '3.8'
+
+services:
+  database:
+    image: postgres:16-alpine
+    container_name: ayunet-postgres
+    restart: always
+    environment:
+      POSTGRES_USER: ${POSTGRES_USER:-postgres}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-postgres_password}
+      POSTGRES_DB: ${POSTGRES_DB:-ayunet_dev}
+    ports:
+      - "${POSTGRES_PORT:-5432}:5432"
+    volumes:
+      - postgres-data:/var/lib/postgresql/data
+
+  backend:
+    build:
+      context: .
+      dockerfile: infra/docker/backend.Dockerfile
+    container_name: ayunet-backend
+    restart: always
+    environment:
+      PORT: 4000
+      NODE_ENV: development
+      DATABASE_URL: postgresql://${POSTGRES_USER:-postgres}:${POSTGRES_PASSWORD:-postgres_password}@database:5432/${POSTGRES_DB:-ayunet_dev}?schema=public
+    ports:
+      - "4000:4000"
+    depends_on:
+      - database
+
+  patient-web:
+    build:
+      context: .
+      dockerfile: infra/docker/frontend.Dockerfile
+      args:
+        APP_NAME: patient-web
+    container_name: ayunet-patient-web
+    restart: always
+    ports:
+      - "3000:3000"
+    depends_on:
+      - backend
+
+  doctor-web:
+    build:
+      context: .
+      dockerfile: infra/docker/frontend.Dockerfile
+      args:
+        APP_NAME: doctor-web
+    container_name: ayunet-doctor-web
+    restart: always
+    ports:
+      - "3001:3000"
+    depends_on:
+      - backend
+
+  admin-web:
+    build:
+      context: .
+      dockerfile: infra/docker/frontend.Dockerfile
+      args:
+        APP_NAME: admin-web
+    container_name: ayunet-admin-web
+    restart: always
+    ports:
+      - "3002:3000"
+    depends_on:
+      - backend
+
+volumes:
+  postgres-data:

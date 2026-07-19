@@ -35,6 +35,11 @@ import { VaccinationsModule } from './vaccinations/vaccinations.module';
 import { MedicinesModule } from './medicines/medicines.module';
 import { PrescriptionsModule } from './prescriptions/prescriptions.module';
 import { PrescriptionItemsModule } from './prescription-items/prescription-items.module';
+import { DiagnosticCentersModule } from './diagnostic-centers/diagnostic-centers.module';
+import { LabTestsModule } from './lab-tests/lab-tests.module';
+import { LabOrdersModule } from './lab-orders/lab-orders.module';
+import { LabReportsModule } from './lab-reports/lab-reports.module';
+
 
 
 
@@ -101,6 +106,12 @@ import { PrescriptionItemsModule } from './prescription-items/prescription-items
     MedicinesModule,
     PrescriptionsModule,
     PrescriptionItemsModule,
+
+    // AyuNet Diagnostics & Lab Management Modules
+    DiagnosticCentersModule,
+    LabTestsModule,
+    LabOrdersModule,
+    LabReportsModule,
   ],
   providers: [
     // Global Rate Limit Guard

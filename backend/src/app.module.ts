@@ -41,6 +41,11 @@ import { LabOrdersModule } from './lab-orders/lab-orders.module';
 import { LabReportsModule } from './lab-reports/lab-reports.module';
 import { PharmaciesModule } from './pharmacies/pharmacies.module';
 import { PharmacyOrdersModule } from './pharmacy-orders/pharmacy-orders.module';
+import { InvoicesModule } from './invoices/invoices.module';
+import { PaymentsModule } from './payments/payments.module';
+import { TransactionsModule } from './transactions/transactions.module';
+import { RefundsModule } from './refunds/refunds.module';
+
 
 
 
@@ -119,6 +124,12 @@ import { PharmacyOrdersModule } from './pharmacy-orders/pharmacy-orders.module';
     // AyuNet Pharmacy & Medication Dispensing Modules
     PharmaciesModule,
     PharmacyOrdersModule,
+
+    // AyuNet Billing & Payment Modules
+    InvoicesModule,
+    PaymentsModule,
+    TransactionsModule,
+    RefundsModule,
   ],
   providers: [
     // Global Rate Limit Guard

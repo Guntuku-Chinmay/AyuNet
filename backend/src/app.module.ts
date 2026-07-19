@@ -39,6 +39,9 @@ import { DiagnosticCentersModule } from './diagnostic-centers/diagnostic-centers
 import { LabTestsModule } from './lab-tests/lab-tests.module';
 import { LabOrdersModule } from './lab-orders/lab-orders.module';
 import { LabReportsModule } from './lab-reports/lab-reports.module';
+import { PharmaciesModule } from './pharmacies/pharmacies.module';
+import { PharmacyOrdersModule } from './pharmacy-orders/pharmacy-orders.module';
+
 
 
 
@@ -112,6 +115,10 @@ import { LabReportsModule } from './lab-reports/lab-reports.module';
     LabTestsModule,
     LabOrdersModule,
     LabReportsModule,
+
+    // AyuNet Pharmacy & Medication Dispensing Modules
+    PharmaciesModule,
+    PharmacyOrdersModule,
   ],
   providers: [
     // Global Rate Limit Guard

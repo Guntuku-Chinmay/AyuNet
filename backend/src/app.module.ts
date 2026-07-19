@@ -22,6 +22,12 @@ import { PatientsModule } from './patients/patients.module';
 import { CaregiversModule } from './caregivers/caregivers.module';
 import { PatientCaregiversModule } from './patient-caregivers/patient-caregivers.module';
 import { TimelineModule } from './timeline/timeline.module';
+import { NotificationsModule } from './notifications/notifications.module';
+import { TimeSlotsModule } from './time-slots/time-slots.module';
+import { AppointmentsModule } from './appointments/appointments.module';
+import { VisitsModule } from './visits/visits.module';
+import { QueueModule } from './queue/queue.module';
+
 
 
 
@@ -66,6 +72,13 @@ import { TimelineModule } from './timeline/timeline.module';
     CaregiversModule,
     PatientCaregiversModule,
     TimelineModule,
+
+    // AyuNet Appointment & Scheduling Modules
+    NotificationsModule,
+    TimeSlotsModule,
+    AppointmentsModule,
+    VisitsModule,
+    QueueModule,
   ],
   providers: [
     // Global Rate Limit Guard

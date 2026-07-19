@@ -27,6 +27,12 @@ import { TimeSlotsModule } from './time-slots/time-slots.module';
 import { AppointmentsModule } from './appointments/appointments.module';
 import { VisitsModule } from './visits/visits.module';
 import { QueueModule } from './queue/queue.module';
+import { MedicalRecordsModule } from './medical-records/medical-records.module';
+import { DiagnosesModule } from './diagnoses/diagnoses.module';
+import { AllergiesModule } from './allergies/allergies.module';
+import { ChronicConditionsModule } from './chronic-conditions/chronic-conditions.module';
+import { VaccinationsModule } from './vaccinations/vaccinations.module';
+
 
 
 
@@ -79,6 +85,13 @@ import { QueueModule } from './queue/queue.module';
     AppointmentsModule,
     VisitsModule,
     QueueModule,
+
+    // AyuNet Electronic Medical Records (EMR) Modules
+    MedicalRecordsModule,
+    DiagnosesModule,
+    AllergiesModule,
+    ChronicConditionsModule,
+    VaccinationsModule,
   ],
   providers: [
     // Global Rate Limit Guard

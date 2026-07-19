@@ -18,6 +18,11 @@ import { RoomsModule } from './rooms/rooms.module';
 import { BedsModule } from './beds/beds.module';
 import { SpecializationsModule } from './specializations/specializations.module';
 import { DoctorAssignmentsModule } from './doctor-assignments/doctor-assignments.module';
+import { PatientsModule } from './patients/patients.module';
+import { CaregiversModule } from './caregivers/caregivers.module';
+import { PatientCaregiversModule } from './patient-caregivers/patient-caregivers.module';
+import { TimelineModule } from './timeline/timeline.module';
+
 
 
 @Module({
@@ -55,6 +60,12 @@ import { DoctorAssignmentsModule } from './doctor-assignments/doctor-assignments
     BedsModule,
     SpecializationsModule,
     DoctorAssignmentsModule,
+
+    // AyuNet Patient & Caregiver Modules
+    PatientsModule,
+    CaregiversModule,
+    PatientCaregiversModule,
+    TimelineModule,
   ],
   providers: [
     // Global Rate Limit Guard

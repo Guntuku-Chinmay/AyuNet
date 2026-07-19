@@ -32,6 +32,10 @@ import { DiagnosesModule } from './diagnoses/diagnoses.module';
 import { AllergiesModule } from './allergies/allergies.module';
 import { ChronicConditionsModule } from './chronic-conditions/chronic-conditions.module';
 import { VaccinationsModule } from './vaccinations/vaccinations.module';
+import { MedicinesModule } from './medicines/medicines.module';
+import { PrescriptionsModule } from './prescriptions/prescriptions.module';
+import { PrescriptionItemsModule } from './prescription-items/prescription-items.module';
+
 
 
 
@@ -92,6 +96,11 @@ import { VaccinationsModule } from './vaccinations/vaccinations.module';
     AllergiesModule,
     ChronicConditionsModule,
     VaccinationsModule,
+
+    // AyuNet Prescription & Medication Modules
+    MedicinesModule,
+    PrescriptionsModule,
+    PrescriptionItemsModule,
   ],
   providers: [
     // Global Rate Limit Guard

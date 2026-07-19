@@ -9,6 +9,17 @@ import { LoggerModule } from './logger/logger.module';
 import { HealthModule } from './health/health.module';
 import { RequestIdMiddleware } from './common/middleware/request-id.middleware';
 
+import { AuthModule } from './auth/auth.module';
+import { AddressesModule } from './addresses/addresses.module';
+import { HospitalsModule } from './hospitals/hospitals.module';
+import { BranchesModule } from './branches/branches.module';
+import { DepartmentsModule } from './departments/departments.module';
+import { RoomsModule } from './rooms/rooms.module';
+import { BedsModule } from './beds/beds.module';
+import { SpecializationsModule } from './specializations/specializations.module';
+import { DoctorAssignmentsModule } from './doctor-assignments/doctor-assignments.module';
+
+
 @Module({
   imports: [
     // Configuration
@@ -33,6 +44,17 @@ import { RequestIdMiddleware } from './common/middleware/request-id.middleware';
     DatabaseModule,
     LoggerModule,
     HealthModule,
+
+    // AyuNet Hospital Organization Modules
+    AuthModule,
+    AddressesModule,
+    HospitalsModule,
+    BranchesModule,
+    DepartmentsModule,
+    RoomsModule,
+    BedsModule,
+    SpecializationsModule,
+    DoctorAssignmentsModule,
   ],
   providers: [
     // Global Rate Limit Guard

@@ -155,10 +155,13 @@ export class PatientsService {
       }
 
       // Update User
-      if (dto.phone) {
+      if (dto.phone || dto.isActive !== undefined) {
         await tx.user.update({
           where: { id: patient.userProfile.userId },
-          data: { phoneNumber: dto.phone.trim() },
+          data: {
+            phoneNumber: dto.phone ? dto.phone.trim() : undefined,
+            isActive: dto.isActive,
+          },
         });
       }
 

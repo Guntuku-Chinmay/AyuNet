@@ -75,6 +75,17 @@ export class CaregiversService {
         },
       });
 
+      // Update User if phone or isActive is changed
+      if (dto.phone || dto.isActive !== undefined) {
+        await tx.user.update({
+          where: { id: caregiver.userProfile.userId },
+          data: {
+            phoneNumber: dto.phone ? dto.phone.trim() : undefined,
+            isActive: dto.isActive,
+          },
+        });
+      }
+
       // Update Caregiver
       const updated = await tx.caregiver.update({
         where: { id },

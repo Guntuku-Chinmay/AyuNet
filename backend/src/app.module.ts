@@ -49,6 +49,8 @@ import { FilesModule } from './files/files.module';
 import { ReportsModule } from './reports/reports.module';
 import { IntegrationsModule } from './integrations/integrations.module';
 import { SearchModule } from './search/search.module';
+import { WorkflowsModule } from './workflows/workflows.module';
+
 
 
 
@@ -151,6 +153,9 @@ import { SearchModule } from './search/search.module';
 
     // AyuNet Global Search & Query Engine Modules
     SearchModule,
+
+    // AyuNet Workflow Automation & Background Jobs Modules
+    WorkflowsModule,
   ],
   providers: [
     // Global Rate Limit Guard

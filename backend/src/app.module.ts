@@ -51,6 +51,8 @@ import { IntegrationsModule } from './integrations/integrations.module';
 import { SearchModule } from './search/search.module';
 import { WorkflowsModule } from './workflows/workflows.module';
 import { AiModule } from './ai/ai.module';
+import { SaasModule } from './saas/saas.module';
+
 
 
 
@@ -161,6 +163,9 @@ import { AiModule } from './ai/ai.module';
 
     // AyuNet AI Services Platform Modules
     AiModule,
+
+    // AyuNet Cloud-Native Multi-Tenant SaaS Platform Modules
+    SaasModule,
   ],
   providers: [
     // Global Rate Limit Guard

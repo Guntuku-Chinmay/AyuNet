@@ -1,0 +1,10 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: ayunet-backend-config
+  namespace: default
+data:
+  PORT: "4000"
+  NODE_ENV: "production"
+  CORS_ORIGIN: "https://ayunet.org,https://app.ayunet.org"
+  LOG_LEVEL: "info"

@@ -1,0 +1,39 @@
+name: AyuNet CI/CD Production Pipeline
+
+on:
+  push:
+    branches: [ main, master ]
+  pull_request:
+    branches: [ main, master ]
+
+jobs:
+  build-and-test:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v3
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '20'
+          cache: 'yarn'
+
+      - name: Install Dependencies
+        run: yarn install --frozen-lockfile
+
+      - name: Lint Verification
+        run: yarn workspace backend lint --if-present
+
+      - name: Run Unit Tests
+        run: yarn workspace backend test
+
+      - name: Check Prisma Database Migration
+        run: npx prisma validate --schema=backend/prisma/schema.prisma
+
+      - name: Build Application
+        run: yarn workspace backend build
+
+      - name: Docker Build Test
+        run: docker build -t ayunet/backend:ci .

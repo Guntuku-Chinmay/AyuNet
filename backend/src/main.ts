@@ -8,6 +8,7 @@ import { AppLogger } from './logger/logger.service';
 import { TransformInterceptor } from './common/interceptors/transform.interceptor';
 import { LoggingInterceptor } from './common/interceptors/logging.interceptor';
 import { HttpExceptionFilter } from './common/filters/http-exception.filter';
+import { CorrelationIdInterceptor } from './common/interceptors/correlation-id.interceptor';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule, {
@@ -43,6 +44,7 @@ async function bootstrap() {
 
   // Register Global Interceptors
   app.useGlobalInterceptors(
+    new CorrelationIdInterceptor(),
     new TransformInterceptor(),
     new LoggingInterceptor(),
   );
@@ -61,9 +63,11 @@ async function bootstrap() {
 
   // Swagger Documentation Setup
   const swaggerConfig = new DocumentBuilder()
-    .setTitle('AyuNet Core API')
-    .setDescription('Enterprise AyuNet Core backend platform infrastructure APIs')
+    .setTitle('AyuNet Enterprise Healthcare API')
+    .setDescription('Enterprise AyuNet Core backend platform infrastructure & healthcare APIs')
     .setVersion('1.0.0')
+    .addBearerAuth({ type: 'http', scheme: 'bearer', bearerFormat: 'JWT' })
+    .addApiKey({ type: 'apiKey', name: 'x-api-key', in: 'header' }, 'api-key')
     .addTag('Health', 'System Operational Checks')
     .build();
 

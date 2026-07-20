@@ -1,72 +1,56 @@
 version: '3.8'
 
 services:
-  database:
-    image: postgres:16-alpine
+  postgres:
+    image: postgres:15-alpine
     container_name: ayunet-postgres
     restart: always
     environment:
-      POSTGRES_USER: ${POSTGRES_USER:-postgres}
-      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-postgres_password}
-      POSTGRES_DB: ${POSTGRES_DB:-ayunet_dev}
+      POSTGRES_USER: ayunet_admin
+      POSTGRES_PASSWORD: ayunet_secure_password
+      POSTGRES_DB: ayunet_db
     ports:
-      - "${POSTGRES_PORT:-5432}:5432"
+      - "5432:5432"
     volumes:
-      - postgres-data:/var/lib/postgresql/data
+      - postgres_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ayunet_admin -d ayunet_db"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  redis:
+    image: redis:7-alpine
+    container_name: ayunet-redis
+    restart: always
+    ports:
+      - "6379:6379"
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
 
   backend:
     build:
       context: .
-      dockerfile: infra/docker/backend.Dockerfile
+      dockerfile: Dockerfile
     container_name: ayunet-backend
     restart: always
-    environment:
-      PORT: 4000
-      NODE_ENV: development
-      DATABASE_URL: postgresql://${POSTGRES_USER:-postgres}:${POSTGRES_PASSWORD:-postgres_password}@database:5432/${POSTGRES_DB:-ayunet_dev}?schema=public
     ports:
       - "4000:4000"
+    environment:
+      PORT: 4000
+      NODE_ENV: production
+      DATABASE_URL: "postgresql://ayunet_admin:ayunet_secure_password@postgres:5432/ayunet_db?schema=public"
+      REDIS_HOST: redis
+      REDIS_PORT: 6379
+      JWT_SECRET: "ayunet_super_secret_jwt_key_2026"
     depends_on:
-      - database
-
-  patient-web:
-    build:
-      context: .
-      dockerfile: infra/docker/frontend.Dockerfile
-      args:
-        APP_NAME: patient-web
-    container_name: ayunet-patient-web
-    restart: always
-    ports:
-      - "3000:3000"
-    depends_on:
-      - backend
-
-  doctor-web:
-    build:
-      context: .
-      dockerfile: infra/docker/frontend.Dockerfile
-      args:
-        APP_NAME: doctor-web
-    container_name: ayunet-doctor-web
-    restart: always
-    ports:
-      - "3001:3000"
-    depends_on:
-      - backend
-
-  admin-web:
-    build:
-      context: .
-      dockerfile: infra/docker/frontend.Dockerfile
-      args:
-        APP_NAME: admin-web
-    container_name: ayunet-admin-web
-    restart: always
-    ports:
-      - "3002:3000"
-    depends_on:
-      - backend
+      postgres:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
 
 volumes:
-  postgres-data:
+  postgres_data:

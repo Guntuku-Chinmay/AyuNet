@@ -1,0 +1,45 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: ayunet-backend
+  namespace: default
+  labels:
+    app: ayunet-backend
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: ayunet-backend
+  template:
+    metadata:
+      labels:
+        app: ayunet-backend
+    spec:
+      containers:
+        - name: ayunet-backend
+          image: ayunet/backend:latest
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 4000
+          envFrom:
+            - configMapRef:
+                name: ayunet-backend-config
+          resources:
+            requests:
+              cpu: "250m"
+              memory: "512Mi"
+            limits:
+              cpu: "1000m"
+              memory: "2Gi"
+          livenessProbe:
+            httpGet:
+              path: /api/v1/health
+              port: 4000
+            initialDelaySeconds: 15
+            periodSeconds: 10
+          readinessProbe:
+            httpGet:
+              path: /api/v1/health
+              port: 4000
+            initialDelaySeconds: 5
+            periodSeconds: 5

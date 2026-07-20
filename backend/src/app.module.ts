@@ -46,6 +46,8 @@ import { PaymentsModule } from './payments/payments.module';
 import { TransactionsModule } from './transactions/transactions.module';
 import { RefundsModule } from './refunds/refunds.module';
 import { FilesModule } from './files/files.module';
+import { ReportsModule } from './reports/reports.module';
+
 
 
 
@@ -136,6 +138,9 @@ import { FilesModule } from './files/files.module';
 
     // AyuNet File & Document Management Modules
     FilesModule,
+
+    // AyuNet Reporting, Analytics & BI Modules
+    ReportsModule,
   ],
   providers: [
     // Global Rate Limit Guard

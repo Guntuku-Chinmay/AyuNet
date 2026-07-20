@@ -50,6 +50,8 @@ import { ReportsModule } from './reports/reports.module';
 import { IntegrationsModule } from './integrations/integrations.module';
 import { SearchModule } from './search/search.module';
 import { WorkflowsModule } from './workflows/workflows.module';
+import { AiModule } from './ai/ai.module';
+
 
 
 
@@ -156,6 +158,9 @@ import { WorkflowsModule } from './workflows/workflows.module';
 
     // AyuNet Workflow Automation & Background Jobs Modules
     WorkflowsModule,
+
+    // AyuNet AI Services Platform Modules
+    AiModule,
   ],
   providers: [
     // Global Rate Limit Guard

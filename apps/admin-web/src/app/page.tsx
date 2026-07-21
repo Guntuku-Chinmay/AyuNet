@@ -1,75 +1,113 @@
-import { Button } from '@ayunet/ui';
-import { formatDate } from '@ayunet/utils';
+'use client';
 
-export default function Home() {
-  const today = formatDate(new Date());
+import React from 'react';
+import { AdminLayout } from '../layouts/admin-layout';
+import { MetricCard } from '../components/common/metric-card';
+import { Card, CardHeader, CardTitle, CardDescription, CardContent } from '../components/ui/card';
+import { Button } from '../components/ui/button';
+import { Badge } from '../components/ui/badge';
+import { Table, TableHeader, TableBody, TableRow, TableHead, TableCell } from '../components/ui/table';
+import { Users, Calendar, Activity, CreditCard, ShieldCheck } from 'lucide-react';
 
+export default function HomePage() {
   return (
-    <main className="flex min-h-screen flex-col items-center justify-between p-24 bg-slate-50">
-      <div className="z-10 max-w-5xl w-full items-center justify-between font-mono text-sm lg:flex">
-        <p className="fixed left-0 top-0 flex w-full justify-center border-b border-slate-200 bg-teal-50/50 pb-6 pt-8 backdrop-blur-2xl lg:static lg:w-auto lg:rounded-xl lg:border lg:bg-slate-100 lg:p-4">
-          Admin Console Workspace Base
-        </p>
-        <div className="fixed bottom-0 left-0 flex h-48 w-full items-end justify-center bg-gradient-to-t from-white via-white lg:static lg:h-auto lg:w-auto lg:bg-none text-slate-500">
-          Initialized: {today}
+    <AdminLayout>
+      <div className="space-y-8">
+        <div className="flex flex-col justify-between gap-4 md:flex-row md:items-center">
+          <div>
+            <h1 className="text-2xl font-extrabold tracking-tight text-slate-900 dark:text-slate-100">
+              Enterprise Executive Overview
+            </h1>
+            <p className="text-sm text-slate-500 dark:text-slate-400">
+              Real-time multi-tenant hospital performance, clinical activity, and system health metrics.
+            </p>
+          </div>
+          <div className="flex items-center space-x-3">
+            <Badge variant="success" className="px-3 py-1 text-xs">
+              <ShieldCheck className="mr-1 h-3.5 w-3.5" /> HIPAA Certified
+            </Badge>
+            <Button variant="default">New Patient Admission</Button>
+          </div>
         </div>
+
+        <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4">
+          <MetricCard
+            title="Total Active Patients"
+            value="14,250"
+            changePercent={12.4}
+            description="Across 12 hospital branches"
+            icon={<Users className="h-5 w-5" />}
+          />
+          <MetricCard
+            title="Today's Appointments"
+            value="342"
+            changePercent={8.1}
+            description="89% completion rate"
+            icon={<Calendar className="h-5 w-5" />}
+          />
+          <MetricCard
+            title="Clinical Lab Orders"
+            value="1,280"
+            changePercent={-2.3}
+            description="Pending verification: 45"
+            icon={<Activity className="h-5 w-5" />}
+          />
+          <MetricCard
+            title="Monthly Revenue"
+            value="₹45,20,000"
+            changePercent={15.8}
+            description="Invoices settled"
+            icon={<CreditCard className="h-5 w-5" />}
+          />
+        </div>
+
+        <Card>
+          <CardHeader>
+            <CardTitle>Recent Patient Admissions & Triage Queue</CardTitle>
+            <CardDescription>Live real-time feed of patient check-ins across emergency and OPD branches.</CardDescription>
+          </CardHeader>
+          <CardContent>
+            <Table>
+              <TableHeader>
+                <TableRow>
+                  <TableHead>Patient Name</TableHead>
+                  <TableHead>MRN</TableHead>
+                  <TableHead>Assigned Doctor</TableHead>
+                  <TableHead>Branch</TableHead>
+                  <TableHead>Status</TableHead>
+                  <TableHead>Triage Priority</TableHead>
+                </TableRow>
+              </TableHeader>
+              <TableBody>
+                <TableRow>
+                  <TableCell className="font-semibold">Rahul Sharma</TableCell>
+                  <TableCell className="font-mono text-xs">MRN-99824</TableCell>
+                  <TableCell>Dr. Priya Mehta</TableCell>
+                  <TableCell>Apollo Central</TableCell>
+                  <TableCell>
+                    <Badge variant="primary">CONFIRMED</Badge>
+                  </TableCell>
+                  <TableCell>
+                    <Badge variant="error">STAT</Badge>
+                  </TableCell>
+                </TableRow>
+                <TableRow>
+                  <TableCell className="font-semibold">Ananya Patel</TableCell>
+                  <TableCell className="font-mono text-xs">MRN-99825</TableCell>
+                  <TableCell>Dr. Rajesh Kumar</TableCell>
+                  <TableCell>Apollo West</TableCell>
+                  <TableCell>
+                    <Badge variant="success">COMPLETED</Badge>
+                  </TableCell>
+                  <TableCell>
+                    <Badge variant="default">ROUTINE</Badge>
+                  </TableCell>
+                </TableRow>
+              </TableBody>
+            </Table>
+          </CardContent>
+        </Card>
       </div>
-
-      <div className="flex flex-col items-center justify-center text-center">
-        <span className="text-teal-600 font-semibold tracking-wider uppercase text-sm mb-2">AyuNet Operations Center</span>
-        <h1 className="text-4xl font-extrabold tracking-tight text-slate-900 sm:text-5xl md:text-6xl mb-6">
-          Admin <span className="text-teal-600">Console Portal</span>
-        </h1>
-        <p className="max-w-md text-slate-500 text-lg mb-8">
-          Welcome to the operations platform. Manage global configurations, tenant profiles, audit compliance logging, database pools, and deployment pipelines.
-        </p>
-        <div className="flex gap-4">
-          <Button variant="primary" size="lg">
-            System Operations
-          </Button>
-          <Button variant="outline" size="lg">
-            Audit Logs
-          </Button>
-        </div>
-      </div>
-
-      <div className="mb-32 grid text-center lg:max-w-5xl lg:w-full lg:mb-0 lg:grid-cols-3 lg:text-left gap-6">
-        <div className="group rounded-lg border border-slate-200 px-5 py-4 transition-colors hover:border-teal-300 hover:bg-teal-50/20 bg-white shadow-sm">
-          <h2 className="mb-3 text-xl font-bold text-slate-800">
-            Tenant Management{' '}
-            <span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">
-              -&gt;
-            </span>
-          </h2>
-          <p className="m-0 max-w-[30ch] text-sm text-slate-500">
-            Configure partner clinics, hospitals, pharmacies, and diagnostic networks.
-          </p>
-        </div>
-
-        <div className="group rounded-lg border border-slate-200 px-5 py-4 transition-colors hover:border-teal-300 hover:bg-teal-50/20 bg-white shadow-sm">
-          <h2 className="mb-3 text-xl font-bold text-slate-800">
-            RBAC & Roles{' '}
-            <span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">
-              -&gt;
-            </span>
-          </h2>
-          <p className="m-0 max-w-[30ch] text-sm text-slate-500">
-            Assign credentials and access boundaries for clinicians, pharmacists, and support staffs.
-          </p>
-        </div>
-
-        <div className="group rounded-lg border border-slate-200 px-5 py-4 transition-colors hover:border-teal-300 hover:bg-teal-50/20 bg-white shadow-sm">
-          <h2 className="mb-3 text-xl font-bold text-slate-800">
-            Integrations{' '}
-            <span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">
-              -&gt;
-            </span>
-          </h2>
-          <p className="m-0 max-w-[30ch] text-sm text-slate-500">
-            Review integration endpoints (HL7/FHIR APIs, SMS channels, Payment gateways).
-          </p>
-        </div>
-      </div>
-    </main>
+    </AdminLayout>
   );
 }

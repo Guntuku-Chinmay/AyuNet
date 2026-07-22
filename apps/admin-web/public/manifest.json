@@ -1,0 +1,22 @@
+{
+  "name": "AyuNet Enterprise Healthcare Platform",
+  "short_name": "AyuNet",
+  "description": "Multi-Tenant Cloud Healthcare & Hospital Management Platform",
+  "start_url": "/",
+  "display": "standalone",
+  "orientation": "portrait-primary",
+  "theme_color": "#0d9488",
+  "background_color": "#ffffff",
+  "icons": [
+    {
+      "src": "/icons/icon-192x192.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "/icons/icon-512x512.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+}

@@ -9,9 +9,9 @@
     "lint": "next lint"
   },
   "dependencies": {
-    "@ayunet/types": "file:../../packages/types",
-    "@ayunet/ui": "file:../../packages/ui",
-    "@ayunet/utils": "file:../../packages/utils",
+    "@ayunet/types": "workspace:*",
+    "@ayunet/ui": "workspace:*",
+    "@ayunet/utils": "workspace:*",
     "@hookform/resolvers": "^3.3.4",
     "@tanstack/react-query": "^5.32.0",
     "axios": "^1.6.8",

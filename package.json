@@ -2,18 +2,13 @@
   "name": "ayunet-monorepo",
   "version": "1.0.0",
   "private": true,
-  "workspaces": [
-    "apps/*",
-    "backend",
-    "packages/*"
-  ],
   "scripts": {
-    "dev:patient": "yarn workspace patient-web dev",
-    "dev:doctor": "yarn workspace doctor-web dev",
-    "dev:admin": "yarn workspace admin-web dev",
-    "dev:backend": "yarn workspace backend start:dev",
-    "build": "yarn workspaces run build",
-    "lint": "yarn workspaces run lint",
+    "dev:patient": "pnpm --filter patient-web dev",
+    "dev:doctor": "pnpm --filter doctor-web dev",
+    "dev:admin": "pnpm --filter admin-web dev",
+    "dev:backend": "pnpm --filter backend start:dev",
+    "build": "pnpm -r build",
+    "lint": "pnpm -r lint",
     "format": "prettier --write \"**/*.{ts,tsx,js,json,md}\"",
     "format:check": "prettier --check \"**/*.{ts,tsx,js,json,md}\"",
     "prepare": "husky install"

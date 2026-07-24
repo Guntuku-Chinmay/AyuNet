@@ -34,5 +34,15 @@
     "*.{js,json,md,css}": [
       "prettier --write"
     ]
+  },
+  "pnpm": {
+    "onlyBuiltDependencies": [
+      "@nestjs/core",
+      "@prisma/client",
+      "@prisma/engines",
+      "@scarf/scarf",
+      "argon2",
+      "prisma"
+    ]
   }
 }
